@@ -5,6 +5,34 @@
     text-align: center;
  }
 
+ button, input[type="submit"] {
+    background-color: #1eade6;
+    font-size: 1.5rem;
+    margin: 2rem auto;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    width: fit-content;
+    align-self: center;
+    color: white;
+    font-weight: bold;
+    transition: all 0.2s;
+    font-family: 'Quicksand', sans-serif;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #4cceff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+button:active, input[type="submit"]:active {
+    background-color: #4cceff;
+    transform: translateY(0);
+}
+
  #headTitle{
     font-size: 3rem;
     cursor: pointer;
@@ -23,27 +51,13 @@
     gap: 3rem;
     
  }
+
  .categoryButton{
-    background-color: rgb(7, 236, 236);
-    font-size: 2rem;
-    margin: 3rem;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 10px;
     width: 200px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 10px 10px 10px gray;
+    padding: 10px;
+    margin: 3rem;
  }
- .categoryButton:hover{
-    background-color: rgb(157, 231, 231);
- }
- .categoryButton:active{
-    background-color: rgb(7, 236, 236);
- }
- 
+
  #questionContainer {
     font-size: 1rem;
     display: flex;
@@ -51,101 +65,90 @@
     justify-content: center;
 }
 #questionContainer p {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
- #nextButton{
-    background-color: rgb(7, 236, 236);
-    font-size: 2rem;
-    margin: 20px;
-    padding: 20px;
-    border: 2px solid black;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 10px 10px 10px gray;
 
-}
- .nextButton:hover{
-    background-color: rgb(157, 231, 231);
- }
- .nextButton:active{
-    background-color: rgb(7, 236, 236);
- }
-
+/* Full-width clickable radio options */
 .radioOptionContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 75%;
-}
- #questionContainer input[type=radio] {
-    width: 1em;
-    height: 1em;
-    margin: 2%;
-    justify-self: right;
-
-}
- #questionContainer label{
+    grid-template-columns: auto 1fr;
+    width: 100%;
+    background-color: #f85996;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 15px;
+    transition: all 0.2s;
+    cursor: pointer;
+    align-items: center;
+  }
+  
+  .radioOptionContainer:hover {
+    background-color: #ff76ac;
+    transform: translateX(5px);
+  }
+  
+  #questionContainer input[type=radio] {
+    width: 1.2em;
+    height: 1.2em;
+    margin: 0 15px 0 5px;
+    cursor: pointer;
+  }
+  
+  #questionContainer label {
     text-align: left;
-    margin-bottom: 2rem;
-}
-
- #formContainer {
+    margin-bottom: 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  #formContainer {
     display: flex;
     flex-direction: column;
- }
+    width: 100%;
+  }
 
  #resultContainer{
-    font-size: 2rem;
+    font-size: 1rem;
+    margin-bottom: 0;
  }
+
  #resultContainer section {
+    font-size: 1rem;
     border: 2px solid black;
     border-radius: 10px;
-    margin-bottom: 10%;
-    padding: 5%
+    margin-bottom: 2%;
+    padding: 1%;
  }
 
  #showResult{
-    font-size: 3rem;
+    margin-top: 1%;
+    font-size: 1rem;
  }
 
- #goHomeButton {
-    background-color: rgb(7, 236, 236);
-    font-size: 2rem;
-    margin: 20px;
-    padding: 20px;
-    border: 2px solid black;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 10px 10px 10px gray;
-    
- }
- #goHomeButton:hover{
-    background-color: rgb(157, 231, 231);
- }
- #goHomeButton:active{
-    background-color: rgb(7, 236, 236);
- }
-
+ 
  @media screen and (max-width: 1000px) {
     #mainContainer {
-       width: 60%;
+       width: 80%;
+       padding: 3rem;
     }
     .categoryButton{
         font-size: 1.5rem;
+        padding: 1rem;
+        margin: 2rem;
      }
-    
+  
 }
 
  @media screen and (max-width: 500px) {
     #mainContainer {
-        width: 40%;
+        width: 50%;
         justify-content: center;
         flex-direction: column;
-        justify-self: center;
-        width: auto;
-        
+        justify-self: center
      }
      .categoryButton{
-        width: auto;
+        margin: 0;
         font-size: 1rem;
      }
 

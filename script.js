@@ -104,7 +104,7 @@ function fillHome() {
         
 
         
-        title.addEventListener("click", function () {  
+        categoryButton.addEventListener("click", function () {  
             correctAnswers = []
             quiz.questions.forEach(question => {
                 correctAnswers.push(question.answers.correct)
@@ -235,8 +235,6 @@ function printQuiz(quiz, index) {
         }
 
 
-
-        
     })
 
     container.appendChild(quizQuestion)
