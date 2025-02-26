@@ -1,37 +1,37 @@
 const quizes = [
     {
-        "category": "movie",
+        "category": "Film",
         "questions": [
             {
-                "question": "Vilken filmen är detta? &#129409; &#128081;",  
+                "question": "Vilken filmen är detta? </br> &#129409; &#128081;",  
                 "answers": {
                     "correct": "Lejonkungen",
                     "wrong": ["Madagaskar", "Djungelboken"]
                 }
             },
             {
-                "question": "Vilken filmen är detta? &#128674; &#129482; &#128148;",  
+                "question": "Vilken filmen är detta? </br> &#128674; &#129482; &#128148;",  
                 "answers": {
                     "correct": "Titanic",
                     "wrong": ["Poseidon", "Pirates of the Caribbean"]
                 }
             },
             {
-                "question": "Vilken filmen är detta? &#128526; &#128299; &#128311; &#128138;",  
+                "question": "Vilken filmen är detta? </br> &#128526; &#128299; &#128311; &#128138;",  
                 "answers": {
                     "correct": "The Matrix",
                     "wrong": ["Inception", "Terminator"]
                 }
             },
             {
-                "question": "Vilken filmen är detta? &#127993; &#128103; &#128293;",  
+                "question": "Vilken filmen är detta? </br> &#127993; &#128103; &#128293;",  
                 "answers": {
                     "correct": "Hunger Games",
                     "wrong": ["Brave", "Divergent"]
                 }
             },
             {
-                "question": "Vilken filmen är detta? &#129415; &#129333; &#127183;",  
+                "question": "Vilken filmen är detta? </br> &#129415; &#129333; &#127183;",  
                 "answers": {
                     "correct": "The Dark Knight", // Fixed spelling of "Knight"
                     "wrong": ["Spider-Man", "Batman Begins"]
@@ -40,38 +40,38 @@ const quizes = [
         ]
     },
     {
-        "category": "music",
+        "category": "Musik",
         "questions": [
             {
-                "question": "vilken låt är detta? &#128103; &#128142; &#128141;",
+                "question": "Vilken låt är detta? </br> &#128103; &#128142; &#128141;",
                 "answers": {
                     "correct": "Single Ladies (Beyoncé)",
                     "wrong": ["Girls Just Wanna Have Fun (Cyndi Lauper)", "Diamonds (Rihanna)"]
                 }
             },
             {
-                "question": "vilken låt är detta? &#128156; &#9748;",
+                "question": "Vilken låt är detta? </br> &#128156; &#9748;",
                 "answers": {
                     "correct": "Purple Rain (Prince)",
                     "wrong": ["November Rain (Guns N' Roses)", "Raindrops Keep Fallin' on My Head (B.J. Thomas)"]
                 }
             },
             {
-                "question": "vilken låt är detta? &#128064; &#128065; &#128005;",
+                "question": "Vilken låt är detta? </br> &#128064; &#128065; &#128005;",
                 "answers": {
                     "correct": "Eye of the Tiger (Survivor)",
                     "wrong": ["Roar (Katy Perry)", "Wild Ones (Flo Rida)"]
                 }
             },
             {
-                "question": "vilken låt är detta? &#128081 &#127926; &#128131;",
+                "question": "Vilken låt är detta? </br> &#128081 &#127926; &#128131;",
                 "answers": {
                     "correct": "Dancing Queen (ABBA)",
                     "wrong": ["Uptown Funk (Mark Ronson ft. Bruno Mars)", "Billie Jean (Michael Jackson)"]
                 }
             },
             {
-                "question": "Vilken låt är detta? &#127929;&#127925;&#128293;&#127936;",
+                "question": "Vilken låt är detta? </br> &#127929;&#127925;&#128293;&#127936;",
                 "answers": {
                     "correct": "Great Balls of Fire (Jerry Lee Lewis)",
                     "wrong": ["Ring of Fire (Johnny Cash)", "Light My Fire (The Doors)"]
@@ -85,15 +85,23 @@ const quizes = [
 let userAnswers = []
 let correctAnswers = []
 let askedQuestions = []
+const mainContainer = document.querySelector("#mainContainer")
 
-function fillHome(){
-    document.body.innerHTML = ""
+const headTitle = document.querySelector("#headTitle")
+headTitle.addEventListener("click", function () {
+    fillHome()
+})
+
+function fillHome() {
+    
+    mainContainer.innerHTML = ""
     quizes.forEach(quiz => {
-        const categoryContainer = document.createElement("div") 
+        const categoryButton = document.createElement("button")
+        categoryButton.className = "categoryButton"
         const title = document.createElement("h2")
         title.textContent = quiz.category
-        categoryContainer.appendChild(title)
-        //console.log(quiz.category)
+        categoryButton.appendChild(title)
+        
 
         
         title.addEventListener("click", function () {  
@@ -104,18 +112,31 @@ function fillHome(){
             }) 
             printQuiz(quiz, 0)
         })
-        document.body.appendChild(categoryContainer)
+        mainContainer.appendChild(categoryButton)
     })
 
 }
+
+
 function displayResults() {
-    document.body.innerHTML = ""
+    mainContainer.innerHTML = ""
     const resultContainer = document.createElement("div")
+    resultContainer.id = "resultContainer"
     const title = document.createElement("h2")
     title.textContent = "Ditt resultat: "
     resultContainer.appendChild(title)
 
     let score = 0;
+    for (let i = 0; i < correctAnswers.length; i++) {
+        if (userAnswers[i] === correctAnswers[i]) {
+            score++;
+        }
+    }
+    const result = document.createElement("p")
+    result.id = "showResult"
+    result.textContent = score + " av " + (correctAnswers.length)
+    resultContainer.appendChild(result)
+
     for (let i = 0; i < correctAnswers.length; i++) {
         const resultSection = document.createElement("section")
         const askedQuestion = document.createElement("p")
@@ -130,18 +151,15 @@ function displayResults() {
             score++;
         }
 
-
         resultSection.appendChild(askedQuestion)
         resultSection.appendChild(answer)
         resultSection.appendChild(correctAnswer)
         resultContainer.appendChild(resultSection)
     }
-     
+         
     
-    const result = document.createElement("p")
-    result.textContent = score + " av " + (correctAnswers.length)
-    resultContainer.appendChild(result)
     const goHomeButton = document.createElement("button")
+    goHomeButton.id = "goHomeButton"
     goHomeButton.textContent = "Till startsidan"
     //console.log(askedQuestions)
 
@@ -153,17 +171,19 @@ function displayResults() {
     })
   
     resultContainer.appendChild(goHomeButton)
-    document.body.appendChild(resultContainer)
+    mainContainer.appendChild(resultContainer)
   
 }
 function printQuiz(quiz, index) {
-    document.body.innerHTML = ""
+    mainContainer.innerHTML = ""
     const currentQuestion = quiz.questions[index]
     askedQuestions.push(currentQuestion.question)
-    const container = document.createElement("div") 
+    const container = document.createElement("div")
+    container.id = "questionContainer"
     const quizQuestion = document.createElement ("p")
     quizQuestion.innerHTML = currentQuestion.question
     const alternativeContainer = document.createElement("form")
+    alternativeContainer.id = "formContainer"
     const answers = [currentQuestion.answers.correct]
     currentQuestion.answers.wrong.forEach(answer => {
         answers.push(answer)
@@ -172,10 +192,12 @@ function printQuiz(quiz, index) {
     answers.sort(() => Math.random() - 0.5)
 
     answers.forEach(answer => {
+        const radioOptionContainer = document.createElement("div")
+        radioOptionContainer.className = "radioOptionContainer"
         const alternativ = document.createElement("input")
         const radioLabel = document.createElement("label")
         radioLabel.textContent = answer
-       
+        
         alternativ.type = "radio"
         alternativ.label = answer
         alternativ.name = currentQuestion.question
@@ -183,12 +205,13 @@ function printQuiz(quiz, index) {
         alternativ.id = answer
         radioLabel.setAttribute("for", answer)
         
-        alternativeContainer.appendChild(alternativ)  
-        alternativeContainer.appendChild(radioLabel)
-        
+        radioOptionContainer.appendChild(alternativ)  
+        radioOptionContainer.appendChild(radioLabel)
+        alternativeContainer.appendChild(radioOptionContainer)
     })
     
     const nextButton = document.createElement("input")
+    nextButton.id = "nextButton"
     nextButton.type = "submit"
     nextButton.value = "Nästa fråga" 
 
@@ -222,6 +245,6 @@ function printQuiz(quiz, index) {
 
 
 
-    document.body.appendChild(container) 
+    mainContainer.appendChild(container) 
 }
 fillHome() 
