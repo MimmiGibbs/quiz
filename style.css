@@ -45,6 +45,7 @@ button:active, input[type="submit"]:active {
     width: 80%;
     padding: 0.5rem;
     display:flex;
+    flex-wrap: wrap;
     justify-content: center;
     flex-direction: row;
     justify-self: center;
@@ -109,8 +110,17 @@ button:active, input[type="submit"]:active {
   }
 
  #resultContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
     font-size: 1rem;
     margin-bottom: 0;
+ }
+
+ #resultContainer h2 {
+    grid-column: 1/-1;
+    margin-bottom: 0;
+    padding: 0;
  }
 
  #resultContainer section {
@@ -120,13 +130,19 @@ button:active, input[type="submit"]:active {
     margin-bottom: 2%;
     padding: 1%;
  }
-
  #showResult{
-    margin-top: 1%;
+    grid-column: 1/-1;
     font-size: 1rem;
+    margin: 0;
+    padding: 0;
  }
 
- 
+ #goHomeButton {
+    grid-column: 1/-1;
+    margin-top: 0;
+    
+ }
+
  @media screen and (max-width: 1000px) {
     #mainContainer {
        width: 80%;
@@ -157,6 +173,9 @@ button:active, input[type="submit"]:active {
         cursor: pointer;
     
     }
-
+    #resultContainer{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
     
 }

@@ -3,35 +3,35 @@ const quizes = [
         "category": "Film",
         "questions": [
             {
-                "question": "Vilken filmen är detta? </br> &#129409; &#128081;",  
+                "question": "Vilken film är detta? </br> &#129409; &#128081;",  
                 "answers": {
                     "correct": "Lejonkungen",
                     "wrong": ["Madagaskar", "Djungelboken"]
                 }
             },
             {
-                "question": "Vilken filmen är detta? </br> &#128674; &#129482; &#128148;",  
+                "question": "Vilken film är detta? </br> &#128674; &#129482; &#128148;",  
                 "answers": {
                     "correct": "Titanic",
                     "wrong": ["Poseidon", "Pirates of the Caribbean"]
                 }
             },
             {
-                "question": "Vilken filmen är detta? </br> &#128526; &#128299; &#128311; &#128138;",  
+                "question": "Vilken film är detta? </br> &#128526; &#128299; &#128311; &#128138;",  
                 "answers": {
                     "correct": "The Matrix",
                     "wrong": ["Inception", "Terminator"]
                 }
             },
             {
-                "question": "Vilken filmen är detta? </br> &#127993; &#128103; &#128293;",  
+                "question": "Vilken film är detta? </br> &#127993; &#128103; &#128293;",  
                 "answers": {
                     "correct": "Hunger Games",
                     "wrong": ["Brave", "Divergent"]
                 }
             },
             {
-                "question": "Vilken filmen är detta? </br> &#129415; &#129333; &#127183;",  
+                "question": "Vilken film är detta? </br> &#129415; &#129333; &#127183;",  
                 "answers": {
                     "correct": "The Dark Knight", // Fixed spelling of "Knight"
                     "wrong": ["Spider-Man", "Batman Begins"]
@@ -80,6 +80,8 @@ const quizes = [
 
         ]
     }
+   
+    
 ];
 
 let userAnswers = []
