@@ -3,6 +3,8 @@
     font-family: 'Quicksand', sans-serif;
     justify-content: center;
     text-align: center;
+    display: flex;
+    flex-direction: column;
  }
 
  button, input[type="submit"] {
@@ -50,7 +52,7 @@ button:active, input[type="submit"]:active {
     flex-direction: row;
     justify-self: center;
     gap: 3rem;
-    
+    align-self: center;
  }
 
  .categoryButton{

@@ -84,6 +84,7 @@ const quizes = [
     
 ];
 
+
 let userAnswers = []
 let correctAnswers = []
 let askedQuestions = []
@@ -96,7 +97,7 @@ headTitle.addEventListener("click", function () {
 
 function fillHome() {
     
-    mainContainer.innerHTML = ""
+    mainContainer.innerHTML = "" //empty content before redraw
     quizes.forEach(quiz => {
         const categoryButton = document.createElement("button")
         categoryButton.className = "categoryButton"
@@ -104,78 +105,18 @@ function fillHome() {
         title.textContent = quiz.category
         categoryButton.appendChild(title)
         
-
-        
         categoryButton.addEventListener("click", function () {  
             correctAnswers = []
             quiz.questions.forEach(question => {
                 correctAnswers.push(question.answers.correct)
-                //console.log(correctAnswers)
             }) 
             printQuiz(quiz, 0)
         })
         mainContainer.appendChild(categoryButton)
     })
-
 }
 
 
-function displayResults() {
-    mainContainer.innerHTML = ""
-    const resultContainer = document.createElement("div")
-    resultContainer.id = "resultContainer"
-    const title = document.createElement("h2")
-    title.textContent = "Ditt resultat: "
-    resultContainer.appendChild(title)
-
-    let score = 0;
-    for (let i = 0; i < correctAnswers.length; i++) {
-        if (userAnswers[i] === correctAnswers[i]) {
-            score++;
-        }
-    }
-    const result = document.createElement("p")
-    result.id = "showResult"
-    result.textContent = score + " av " + (correctAnswers.length)
-    resultContainer.appendChild(result)
-
-    for (let i = 0; i < correctAnswers.length; i++) {
-        const resultSection = document.createElement("section")
-        const askedQuestion = document.createElement("p")
-        askedQuestion.innerHTML = askedQuestions[i]
-
-        const answer = document.createElement("p")
-        answer.textContent = "Du svarade: " + userAnswers[i]
-        const correctAnswer = document.createElement("p")
-        correctAnswer.textContent = "Rätt svar är: " + correctAnswers[i]
-
-        if (userAnswers[i] === correctAnswers[i]) {
-            score++;
-        }
-
-        resultSection.appendChild(askedQuestion)
-        resultSection.appendChild(answer)
-        resultSection.appendChild(correctAnswer)
-        resultContainer.appendChild(resultSection)
-    }
-         
-    
-    const goHomeButton = document.createElement("button")
-    goHomeButton.id = "goHomeButton"
-    goHomeButton.textContent = "Till startsidan"
-    //console.log(askedQuestions)
-
-    goHomeButton.addEventListener("click", function () {
-        userAnswers = []
-        correctAnswers = []
-        askedQuestions = []
-        fillHome()
-    })
-  
-    resultContainer.appendChild(goHomeButton)
-    mainContainer.appendChild(resultContainer)
-  
-}
 function printQuiz(quiz, index) {
     mainContainer.innerHTML = ""
     const currentQuestion = quiz.questions[index]
@@ -191,7 +132,7 @@ function printQuiz(quiz, index) {
         answers.push(answer)
     })
     
-    answers.sort(() => Math.random() - 0.5)
+    answers.sort(() => Math.random() - 0.5) //mixes the wrong and right answers
 
     answers.forEach(answer => {
         const radioOptionContainer = document.createElement("div")
@@ -222,29 +163,75 @@ function printQuiz(quiz, index) {
         const selectedRadio = document.querySelector(`input[name="${radioName}"]:checked`)
 
         if (selectedRadio) {
-
             userAnswers.push(selectedRadio.value)
-            //console.log(userAnswers)
             if (index < quiz.questions.length -1) {
-                //console.log("test" + quiz.questions.length)
                 printQuiz(quiz, index + 1)
             } else {
                 displayResults()
             }
-            
         } else {
             alert("Du måste välja ett alternativ!")
         }
-
 
     })
 
     container.appendChild(quizQuestion)
     container.appendChild(alternativeContainer)
     container.appendChild(nextButton)
-
-
-
     mainContainer.appendChild(container) 
+}
+
+function displayResults() {
+    mainContainer.innerHTML = ""
+    const resultContainer = document.createElement("div")
+    resultContainer.id = "resultContainer"
+    const title = document.createElement("h2")
+    title.textContent = "Ditt resultat: "
+    resultContainer.appendChild(title)
+
+    let score = 0;
+    for (let i = 0; i < correctAnswers.length; i++) {
+        if (userAnswers[i] === correctAnswers[i]) {
+            score++;
+        }
+    }
+    const result = document.createElement("p")
+    result.id = "showResult"
+    result.textContent = score + " av " + (correctAnswers.length)
+    resultContainer.appendChild(result)
+
+    for (let i = 0; i < correctAnswers.length; i++) {
+        const resultSection = document.createElement("section")
+        const askedQuestion = document.createElement("p")
+        askedQuestion.innerHTML = askedQuestions[i]
+        const answer = document.createElement("p")
+        answer.textContent = "Du svarade: " + userAnswers[i]
+        const correctAnswer = document.createElement("p")
+        correctAnswer.textContent = "Rätt svar är: " + correctAnswers[i]
+
+        if (userAnswers[i] === correctAnswers[i]) {
+            score++;
+        }
+        resultSection.appendChild(askedQuestion)
+        resultSection.appendChild(answer)
+        resultSection.appendChild(correctAnswer)
+        resultContainer.appendChild(resultSection)
+    }
+         
+    
+    const goHomeButton = document.createElement("button")
+    goHomeButton.id = "goHomeButton"
+    goHomeButton.textContent = "Till startsidan"
+
+    goHomeButton.addEventListener("click", function () {
+        userAnswers = []
+        correctAnswers = []
+        askedQuestions = []
+        fillHome()
+    })
+  
+    resultContainer.appendChild(goHomeButton)
+    mainContainer.appendChild(resultContainer)
+  
 }
 fillHome() 
