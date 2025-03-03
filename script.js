@@ -92,6 +92,9 @@ const mainContainer = document.querySelector("#mainContainer")
 
 const headTitle = document.querySelector("#headTitle")
 headTitle.addEventListener("click", function () {
+    userAnswers = []
+    correctAnswers = []
+    askedQuestions = []
     fillHome()
 })
 
@@ -150,6 +153,11 @@ function printQuiz(quiz, index) {
         
         radioOptionContainer.appendChild(alternativ)  
         radioOptionContainer.appendChild(radioLabel)
+
+        radioOptionContainer.addEventListener('click', function() {
+            alternativ.checked = true;
+        })
+
         alternativeContainer.appendChild(radioOptionContainer)
     })
     
@@ -200,8 +208,17 @@ function displayResults() {
     result.textContent = score + " av " + (correctAnswers.length)
     resultContainer.appendChild(result)
 
+    let answerColor = ""
     for (let i = 0; i < correctAnswers.length; i++) {
+        if (userAnswers[i] === correctAnswers[i]) {
+            answerColor = "rgb(166, 255, 166)"
+            score++;
+        }
+        else {
+            answerColor = "rgb(255, 183, 183)"
+        }
         const resultSection = document.createElement("section")
+        resultSection.style = `background-color: ${answerColor}`
         const askedQuestion = document.createElement("p")
         askedQuestion.innerHTML = askedQuestions[i]
         const answer = document.createElement("p")
@@ -209,9 +226,7 @@ function displayResults() {
         const correctAnswer = document.createElement("p")
         correctAnswer.textContent = "Rätt svar är: " + correctAnswers[i]
 
-        if (userAnswers[i] === correctAnswers[i]) {
-            score++;
-        }
+        
         resultSection.appendChild(askedQuestion)
         resultSection.appendChild(answer)
         resultSection.appendChild(correctAnswer)
